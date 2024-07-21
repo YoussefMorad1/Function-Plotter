@@ -2,7 +2,10 @@ import re
 
 
 class FunctionValidator:
-    """Validates the user-entered function."""
+    """
+    Validates the user-entered function contains only valid characters.
+    It doesn't validate the correctness or the meaning of the function.
+    """
     reg = r'(\d+\.?\d*|[+\-*/^()Xx]|log10|sqrt)'
 
     @staticmethod

@@ -1,5 +1,6 @@
 import re
 from function_validator import FunctionValidator
+import numpy as np
 
 
 class FunctionEvaluator:
@@ -15,6 +16,12 @@ class FunctionEvaluator:
         # Check if the function is valid (not malicious or having built-in functions)
         if not FunctionValidator.is_valid_function(func):
             raise ValueError("Error: Function contains invalid characters or built-in functions.")
+
+        if re.search(r'/0\b', func):
+            raise ZeroDivisionError("Error: Function contains a direct divide-by-zero operation.")
+
+        if func == '':
+            raise ValueError("Error: Function is empty.")
 
         # replace power operator with python equivalent
         func = func.replace('^', '**')

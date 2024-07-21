@@ -12,7 +12,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.plotWidget.setLayout(QVBoxLayout())
-        self.initialize_plot()
+        self.initialize_plot(self.minSpinBox.value(), self.maxSpinBox.value())
         self.setFixedSize(1055, 586)
 
         # Connect click signals of digits and operators to insert text
@@ -43,7 +43,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         """Evaluates the function and plots it in the plot widget."""
         try:
             fig = FunctionPlotter.plot_function(self.lineEdit.text(), self.minSpinBox.value(), self.maxSpinBox.value())
-            plt.close(fig) # Close the figure to avoid memory leak
+            plt.close(fig)  # Close the figure to avoid memory leak
             canvas = FigureCanvas(fig)
             for i in reversed(range(self.plotWidget.layout().count())):
                 self.plotWidget.layout().itemAt(i).widget().deleteLater()
@@ -53,9 +53,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.statusbar.showMessage(str(e))
             self.lineEdit.setFocus()
 
-    def initialize_plot(self):
+    def initialize_plot(self, minX, maxX):
         """Initializes the plot widget with an empty plot."""
-        fig = FunctionPlotter.empty_plot()
+        fig = FunctionPlotter.empty_plot(minX, maxX)
         plt.close(fig) # Close the figure to avoid memory leak
         canvas = FigureCanvas(fig)
         self.plotWidget.layout().addWidget(canvas)

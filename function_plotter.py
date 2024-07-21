@@ -27,10 +27,12 @@ class FunctionPlotter:
         return fig
 
     @staticmethod
-    def empty_plot():
+    def empty_plot(minX, maxX):
         """Returns an empty plot."""
         fig = plt.figure()
         plt.xlabel('x')
         plt.ylabel('f (x)')
+        plt.xlim(minX, maxX)
+        plt.ylim(minX, maxX)
         plt.grid(True)
         return fig
