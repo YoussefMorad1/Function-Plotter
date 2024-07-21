@@ -13,5 +13,5 @@ def test_plot_function_invalid_range():
 
 
 def test_empty_plot():
-    fig = FunctionPlotter.empty_plot()
+    fig = FunctionPlotter.empty_plot(-10, 10)
     assert fig is not None
